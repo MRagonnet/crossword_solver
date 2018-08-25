@@ -1,12 +1,18 @@
 import numpy as np
 
+
+
 class Crossword(object):
     """docstring for Crossword"""
-    def __init__(self, crossword_width):
+    def __init__(self, crossword_width,crossword_clue_dict_list):
         super(Crossword, self).__init__()
         self.crossword_width = crossword_width
         self.crossword_array = self.CreateCrosswordArray(crossword_width)
-        self.crossword_array = self.PopulateCrosswordArray(self.crossword_array)
+        self.crossword_clue_dict_list = crossword_clue_dict_list
+        self.clues = self.MakeClueList(self.crossword_clue_dict_list)
+        self.crossword_array = self.PopulateCrosswordArray(self.crossword_array,self.clues)
+        
+        
 
     def CreateCrosswordArray(self,crossword_width):       
         crossword_array = [[None]*crossword_width for value in range(crossword_width)]
@@ -15,26 +21,34 @@ class Crossword(object):
 
     def CrosswordPrettyPrint(self):
         for row in self.crossword_array:
-            print(row)
+            row_string=""
+            for value in row:
+                if value == None:
+                    row_string+="N"
+                else:
+                    row_string+=str(value)
+            print(row_string)
 
-    #def MakeClueList:
+    def MakeClueList(self,crossword_clue_dict_list):
+        clues = []
+        for clue_dict in crossword_clue_dict_list:
+            clues.append(Clue(int(clue_dict["word_length"]),[int(clue_dict["x_coord"]),int(clue_dict["y_coord"])],clue_dict["direction"],clue_dict["clue_text"]))
 
-    def PopulateCrosswordArray(self,crossword_array):
-        new = Clue("normal",6,[2,2],"down","an eminently fuckable boy")
-        
-        print(crossword_array[new.word_row[0]:new.word_row[1]][new.word_column[0]:new.word_column[1]])
-        print("")
-        print(crossword_array[2:8,2])
-        print("")
-        
-        crossword_array[new.word_row[0]:new.word_row[1],new.word_column[0]:new.word_column[1]] = 0
+        return clues
+
+
+
+
+    def PopulateCrosswordArray(self,crossword_array,clues):
+        for new in clues:
+            crossword_array[new.word_row[0]:new.word_row[1],new.word_column[0]:new.word_column[1]] = 0
 
         return crossword_array
 
 
 class Clue(object):
     """docstring for Clue"""
-    def __init__(self, clue_type,word_length,word_starting_square,word_direction,clue_text):
+    def __init__(self,word_length,word_starting_square,word_direction,clue_text, clue_type = "normal"):
         super (Clue, self).__init__()
         self.clue_type = clue_type
         self.word_length = word_length
@@ -57,6 +71,25 @@ class Clue(object):
         return word_row,word_column
 
 
+def CrosswordFileToClueDictList(filepath):
+    clues_dict_list=[]
+    file_text=""
+    with open(filepath,"r") as f:
+        file_text = f.read()
+
+    split_text = file_text.split("\n")
+    for line in split_text:
+        if line == "":
+            continue
+
+        comma_split_text = line.split(",")
+        clues_dict_list.append({"x_coord":comma_split_text[0],
+            "y_coord":comma_split_text[1],
+            "word_length":comma_split_text[2],
+            "direction":comma_split_text[3],
+            "clue_text":comma_split_text[4]})
+
+    return clues_dict_list
 
 
 
@@ -64,5 +97,9 @@ class Clue(object):
         
 
 if __name__ == '__main__':
-    crossword=Crossword(10)
+    
+    filepath = "crossword_clues_test.txt"
+    clues_dict_list=CrosswordFileToClueDictList(filepath)
+
+    crossword=Crossword(7,clues_dict_list)
     crossword.CrosswordPrettyPrint()
