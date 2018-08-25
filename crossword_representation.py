@@ -4,15 +4,34 @@ import numpy as np
 
 class Crossword(object):
     """docstring for Crossword"""
-    def __init__(self, crossword_width,crossword_clue_dict_list):
+    def __init__(self, crossword_width,filepath):
         super(Crossword, self).__init__()
         self.crossword_width = crossword_width
         self.crossword_array = self.CreateCrosswordArray(crossword_width)
-        self.crossword_clue_dict_list = crossword_clue_dict_list
+
+        self.crossword_clue_dict_list = self.CrosswordFileToClueDictList(filepath)
         self.clues = self.MakeClueList(self.crossword_clue_dict_list)
         self.crossword_array = self.PopulateCrosswordArray(self.crossword_array,self.clues)
         
-        
+    def CrosswordFileToClueDictList(self,filepath):
+        clues_dict_list=[]
+        file_text=""
+        with open(filepath,"r") as f:
+            file_text = f.read()
+
+        split_text = file_text.split("\n")
+        for line in split_text:
+            if line == "":
+                continue
+
+            comma_split_text = line.split(",")
+            clues_dict_list.append({"x_coord":comma_split_text[0],
+                "y_coord":comma_split_text[1],
+                "word_length":comma_split_text[2],
+                "direction":comma_split_text[3],
+                "clue_text":comma_split_text[4]})
+
+        return clues_dict_list   
 
     def CreateCrosswordArray(self,crossword_width):       
         crossword_array = [[None]*crossword_width for value in range(crossword_width)]
@@ -71,25 +90,7 @@ class Clue(object):
         return word_row,word_column
 
 
-def CrosswordFileToClueDictList(filepath):
-    clues_dict_list=[]
-    file_text=""
-    with open(filepath,"r") as f:
-        file_text = f.read()
 
-    split_text = file_text.split("\n")
-    for line in split_text:
-        if line == "":
-            continue
-
-        comma_split_text = line.split(",")
-        clues_dict_list.append({"x_coord":comma_split_text[0],
-            "y_coord":comma_split_text[1],
-            "word_length":comma_split_text[2],
-            "direction":comma_split_text[3],
-            "clue_text":comma_split_text[4]})
-
-    return clues_dict_list
 
 
 
@@ -99,7 +100,7 @@ def CrosswordFileToClueDictList(filepath):
 if __name__ == '__main__':
     
     filepath = "crossword_clues_test.txt"
-    clues_dict_list=CrosswordFileToClueDictList(filepath)
+    
 
-    crossword=Crossword(7,clues_dict_list)
+    crossword=Crossword(7,filepath)
     crossword.CrosswordPrettyPrint()
