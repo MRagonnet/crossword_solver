@@ -36,7 +36,7 @@ class Crossword(object):
     def CreateCrosswordArray(self,crossword_width):       
         crossword_array = [[None]*crossword_width for value in range(crossword_width)]
         
-        return np.array(crossword_array)    
+        return np.array(crossword_array, dtype=object)    
 
     def CrosswordPrettyPrint(self):
         for row in self.crossword_array:
@@ -44,6 +44,8 @@ class Crossword(object):
             for value in row:
                 if value == None:
                     row_string+="N"
+                elif value == "":
+                    row_string += "_"
                 else:
                     row_string+=str(value)
             print(row_string)
@@ -60,7 +62,7 @@ class Crossword(object):
 
     def PopulateCrosswordArray(self,crossword_array,clues):
         for new in clues:
-            crossword_array[new.word_row[0]:new.word_row[1],new.word_column[0]:new.word_column[1]] = 0
+            crossword_array[new.word_row[0]:new.word_row[1],new.word_column[0]:new.word_column[1]] = ""
 
         return crossword_array
 

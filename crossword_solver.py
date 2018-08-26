@@ -14,7 +14,11 @@
 
 
 ### exhaustive search approach
-
+ # for each clue, generate the list of possible words
+ # for each tile, track the possible letters. 
+ # use the limitations of the letters to eliminate some words
+ # when searching, choose a word to place and update possible words for each clue
 
 
 ### trained network with knowledge base approach
+
