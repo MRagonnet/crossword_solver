@@ -1,0 +1,26 @@
+0, 2, '(6)', 'across', 'Fortified building'
+0, 4, '(5)', 'across', 'Vehicle driven remotely over extraterrestrial terrain'
+0, 7, '(7)', 'across', 'Assuaged'
+0, 10, '(5)', 'across', 'Heads of the Roman Catholic church'
+0, 12, '(7)', 'across', 'Forward a message on a microblog website'
+1, 6, '(3-3)', 'across', 'Involving movement in either direction'
+2, 0, '(6,5)', 'across', "It's anyone's guess"
+6, 8, '(7)', 'across', 'French Riviera resort'
+7, 0, '(4-3)', 'across', 'Loser'
+7, 12, '(6)', 'across', 'Moroccan seaport'
+8, 0, '(6)', 'across', 'Required'
+8, 8, '(5)', 'across', 'Watch'
+10, 0, '(5)', 'across', "HMS Bounty's captain"
+0, 2, '(6)', 'down', 'Fortified building'
+0, 4, '(5)', 'down', 'Vehicle driven remotely over extraterrestrial terrain'
+0, 7, '(7)', 'down', 'Assuaged'
+0, 10, '(5)', 'down', 'Heads of the Roman Catholic church'
+0, 12, '(7)', 'down', 'Forward a message on a microblog website'
+1, 6, '(3-3)', 'down', 'Involving movement in either direction'
+2, 0, '(6,5)', 'down', "It's anyone's guess"
+6, 8, '(7)', 'down', 'French Riviera resort'
+7, 0, '(4-3)', 'down', 'Loser'
+7, 12, '(6)', 'down', 'Moroccan seaport'
+8, 0, '(6)', 'down', 'Required'
+8, 8, '(5)', 'down', 'Watch'
+10, 0, '(5)', 'down', "HMS Bounty's captain"
