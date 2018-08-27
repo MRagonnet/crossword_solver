@@ -3,6 +3,18 @@ import re
 import os
 
 def GetWordList():
+    dic_path = "google_dict.txt"
+
+    dic_text = ""
+    with open(dic_path,"r") as f:
+        dic_text = f.read()
+
+    word_list = dic_text.split(",")
+
+    return word_list
+
+
+def GetHunspellWordList():
     dic_path = os.path.join("hunspell-en_US","en_US.dic")
 
     dic_text = ""
@@ -55,6 +67,7 @@ def WordPossibilities(word_array, letter_possibilities=[]):
 if __name__ == '__main__':
     #word = laptop
     word_list = GetWordList()
+    print(word_list[0])
     correct_word = "eat"
     
     current_word = [""] * len(correct_word)

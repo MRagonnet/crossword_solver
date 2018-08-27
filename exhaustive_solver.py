@@ -4,6 +4,8 @@ from word_possibilities import WordPossibilities
 
 import numpy as np
 
+import os
+
 class ExhaustiveCrosswordSolver(object):
     """docstring for ExhaustiveCrosswordSolver"""
     def __init__(self, crossword_width,clues_file_path):
@@ -213,6 +215,6 @@ class ExhaustiveCrosswordSolver(object):
 
 if __name__ == '__main__':
     crossword_width = 7
-    file_path = "crossword_clues_test.txt"
+    file_path = os.path.join("crossword_clues","crossword_clues_test.txt")
 
     solver = ExhaustiveCrosswordSolver(crossword_width,file_path)
