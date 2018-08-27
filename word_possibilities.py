@@ -18,8 +18,8 @@ def GetWordList():
 
 
 def WordPossibilities(word_array, letter_possibilities=[]):
-    words_list = nltk_words.words()
-    # words_list = GetWordList()      
+    # words_list = nltk_words.words()
+    words_list = GetWordList()      
 
     regex_word = ""
 
@@ -62,10 +62,10 @@ if __name__ == '__main__':
 
     print(current_word)
 
-    current_word = [""] * 7
-    current_word[0] = "o"
-    current_word[2] = "l"
-    current_word[4] = "g"
+    current_word = [""] * 4
+    current_word[0] = "b"
+    current_word[1] = "a"
+    # current_word[2] = "g"
 
 
     word_suggestions = WordPossibilities(current_word)#,list(correct_word))

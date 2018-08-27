@@ -33,10 +33,12 @@ class Crossword(object):
 
         return clues_dict_list   
 
+
     def CreateCrosswordArray(self,crossword_width):       
         crossword_array = [[None]*crossword_width for value in range(crossword_width)]
         
         return np.array(crossword_array, dtype=object)    
+
 
     def CrosswordPrettyPrint(self):
         for row in self.crossword_array:
@@ -50,6 +52,7 @@ class Crossword(object):
                     row_string+=str(value)
             print(row_string)
 
+
     def MakeClueList(self,crossword_clue_dict_list):
         clues = []
         for clue_dict in crossword_clue_dict_list:
@@ -58,13 +61,18 @@ class Crossword(object):
         return clues
 
 
-
-
     def PopulateCrosswordArray(self,crossword_array,clues):
         for new in clues:
             crossword_array[new.word_row[0]:new.word_row[1],new.word_column[0]:new.word_column[1]] = ""
 
         return crossword_array
+
+
+    def InsertWordIntoCrossword(self,clue,word):
+        for letter_i in range(len(word)):
+            clue_word_letter_row, clue_word_letter_column = clue.ClueLetterIndexToCrosswordIndex(letter_i)
+            self.crossword_array[clue_word_letter_row,clue_word_letter_column] = word[letter_i]
+
 
 
 class Clue(object):
@@ -90,6 +98,17 @@ class Clue(object):
 
 
         return word_row,word_column
+
+    def ClueLetterIndexToCrosswordIndex(self,letter_index):
+        row_i = self.word_row[0]
+        column_i = self.word_column[0]
+
+        if self.word_direction.lower() == "across":
+            column_i += letter_index
+        else:
+            row_i += letter_index
+
+        return (row_i,column_i)
 
 
 
