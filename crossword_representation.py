@@ -73,6 +73,10 @@ class Crossword(object):
             clue_word_letter_row, clue_word_letter_column = clue.ClueLetterIndexToCrosswordIndex(letter_i)
             self.crossword_array[clue_word_letter_row,clue_word_letter_column] = word[letter_i]
 
+    def GetWord(self,clue):
+        clue_word=self.crossword_array[clue.word_row[0]:clue.word_row[1],clue.word_column[0]:clue.word_column[1]]
+        return clue_word
+
 
 
 class Clue(object):
